@@ -1,0 +1,6 @@
+{
+  "name": "WorkMail Planner",
+  "description": "Offline-First Android Work Timeline, Knowledge Graph, PDF Export, and GitHub Actions APK Build System",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
