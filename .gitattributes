@@ -1,0 +1,6 @@
+# Git attributes to prevent binary corruption and specify line endings
+*.jar binary
+*.png binary
+*.webp binary
+gradlew text eol=lf
+gradlew.bat text eol=crlf
