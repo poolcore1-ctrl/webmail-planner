@@ -288,6 +288,25 @@ fun AgendaCard(item: WorkItem, onToggle: () -> Unit) {
                     }
                 }
             }
+            Spacer(modifier = Modifier.weight(1f))
+            
+            val context = LocalContext.current
+            IconButton(onClick = {
+                // Launch Outlook to trigger the Accessibility Service scraper
+                val intent = context.packageManager.getLaunchIntentForPackage("com.microsoft.office.outlook")
+                if (intent != null) {
+                    Toast.makeText(context, "Opening Outlook for Scraper...", Toast.LENGTH_SHORT).show()
+                    context.startActivity(intent)
+                } else {
+                    Toast.makeText(context, "Outlook not installed", Toast.LENGTH_SHORT).show()
+                }
+            }) {
+                Icon(
+                    imageVector = Icons.Outlined.ContentPasteSearch, 
+                    contentDescription = "Scrape Full Email", 
+                    tint = PrimaryPurple
+                )
+            }
         }
     }
 }
