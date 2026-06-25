@@ -76,7 +76,7 @@ fun ExplorerScreen(viewModel: MainViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(DeepSlateBackground)
+            .background(WhiteBackground)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -91,7 +91,7 @@ fun ExplorerScreen(viewModel: MainViewModel) {
             Text(
                 text = "Secure local sandboxed files and reports vault",
                 fontSize = 12.sp,
-                color = TextSecondary
+                color = TextSecondaryDark
             )
         }
 
@@ -100,11 +100,11 @@ fun ExplorerScreen(viewModel: MainViewModel) {
             value = searchQuery,
             onValueChange = { searchQuery = it },
             placeholder = { Text("Search document name...") },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search", tint = TextSecondary) },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search", tint = TextSecondaryDark) },
             modifier = Modifier.fillMaxWidth().testTag("explorer_search_input"),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = CorporateIndigo,
-                unfocusedBorderColor = AccentBorder
+                focusedBorderColor = PrimaryPurple,
+                unfocusedBorderColor = AccentBorderLight
             ),
             singleLine = true
         )
@@ -128,14 +128,14 @@ fun ExplorerScreen(viewModel: MainViewModel) {
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(8.dp))
-                        .background(if (isSelected) CorporateIndigo else DeepSlateCard)
-                        .border(1.dp, if (isSelected) Color.Transparent else AccentBorder, RoundedCornerShape(8.dp))
+                        .background(if (isSelected) PrimaryPurple else LightCard)
+                        .border(1.dp, if (isSelected) Color.Transparent else AccentBorderLight, RoundedCornerShape(8.dp))
                         .clickable { selectedCategory = cat }
                         .padding(8.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Icon(icon, contentDescription = cat, tint = if (isSelected) Color.White else TextSecondary, modifier = Modifier.size(24.dp))
+                        Icon(icon, contentDescription = cat, tint = if (isSelected) Color.White else TextSecondaryDark, modifier = Modifier.size(24.dp))
                         Spacer(modifier = Modifier.height(4.dp))
                         Text(cat, fontSize = 11.sp, fontWeight = FontWeight.Bold, color = if (isSelected) Color.White else Color.White)
                     }
@@ -143,7 +143,7 @@ fun ExplorerScreen(viewModel: MainViewModel) {
             }
         }
 
-        Divider(color = AccentBorder)
+        Divider(color = AccentBorderLight)
 
         // Search files matching categories
         Text(
@@ -158,14 +158,14 @@ fun ExplorerScreen(viewModel: MainViewModel) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .border(1.dp, AccentBorder, RoundedCornerShape(8.dp)),
+                    .border(1.dp, AccentBorderLight, RoundedCornerShape(8.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Icon(Icons.Default.FolderOpen, contentDescription = "Empty Folder", tint = TextSecondary, modifier = Modifier.size(48.dp))
+                    Icon(Icons.Default.FolderOpen, contentDescription = "Empty Folder", tint = TextSecondaryDark, modifier = Modifier.size(48.dp))
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text("No Sandboxed Files Linked", fontWeight = FontWeight.Bold, color = TextPrimary)
-                    Text("Link files on specific day from Timeline screen", fontSize = 11.sp, color = TextSecondary)
+                    Text("No Sandboxed Files Linked", fontWeight = FontWeight.Bold, color = TextPrimaryDark)
+                    Text("Link files on specific day from Timeline screen", fontSize = 11.sp, color = TextSecondaryDark)
                 }
             }
         } else {
@@ -180,8 +180,8 @@ fun ExplorerScreen(viewModel: MainViewModel) {
                             .clickable {
                                 Toast.makeText(context, "Opening file secure sandbox internally...", Toast.LENGTH_SHORT).show()
                             },
-                        colors = CardDefaults.cardColors(containerColor = DeepSlateCard),
-                        border = BorderStroke(1.dp, AccentBorder)
+                        colors = CardDefaults.cardColors(containerColor = LightCard),
+                        border = BorderStroke(1.dp, AccentBorderLight)
                     ) {
                         Row(
                             modifier = Modifier.padding(12.dp),
@@ -196,7 +196,7 @@ fun ExplorerScreen(viewModel: MainViewModel) {
                                     else -> Icons.Default.Description
                                 },
                                 contentDescription = "File Type",
-                                tint = CorporateIndigo,
+                                tint = PrimaryPurple,
                                 modifier = Modifier.size(32.dp)
                             )
                             Spacer(modifier = Modifier.width(12.dp))
@@ -209,13 +209,13 @@ fun ExplorerScreen(viewModel: MainViewModel) {
                                     color = Color.White
                                 )
                                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    Text("📅 ${doc.date}", fontSize = 10.sp, color = TextSecondary)
-                                    Text("•", fontSize = 10.sp, color = TextSecondary)
-                                    Text("${(doc.fileSize / 1024)} KB", fontSize = 10.sp, color = TextSecondary)
+                                    Text("📅 ${doc.date}", fontSize = 10.sp, color = TextSecondaryDark)
+                                    Text("•", fontSize = 10.sp, color = TextSecondaryDark)
+                                    Text("${(doc.fileSize / 1024)} KB", fontSize = 10.sp, color = TextSecondaryDark)
                                 }
                             }
 
-                            Icon(Icons.Default.OpenInNew, contentDescription = "Open file", tint = TextSecondary, modifier = Modifier.size(16.dp))
+                            Icon(Icons.Default.OpenInNew, contentDescription = "Open file", tint = TextSecondaryDark, modifier = Modifier.size(16.dp))
                         }
                     }
                 }

@@ -80,7 +80,7 @@ fun GraphScreen(viewModel: MainViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(DeepSlateBackground)
+            .background(WhiteBackground)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
@@ -95,7 +95,7 @@ fun GraphScreen(viewModel: MainViewModel) {
             Text(
                 text = "Interactive visual relationship graph (local-only)",
                 fontSize = 12.sp,
-                color = TextSecondary
+                color = TextSecondaryDark
             )
         }
 
@@ -104,11 +104,11 @@ fun GraphScreen(viewModel: MainViewModel) {
             value = searchQuery,
             onValueChange = { searchQuery = it },
             placeholder = { Text("Search Project graph, Person graph, or Tasks...") },
-            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search", tint = TextSecondary) },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search", tint = TextSecondaryDark) },
             modifier = Modifier.fillMaxWidth().testTag("graph_search_input"),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = CorporateIndigo,
-                unfocusedBorderColor = AccentBorder
+                focusedBorderColor = PrimaryPurple,
+                unfocusedBorderColor = AccentBorderLight
             ),
             singleLine = true
         )
@@ -116,8 +116,8 @@ fun GraphScreen(viewModel: MainViewModel) {
         // Focused Node Overview
         activeFocusNode?.let { node ->
             Card(
-                colors = CardDefaults.cardColors(containerColor = DeepSlateCard),
-                border = BorderStroke(1.dp, CorporateIndigo.copy(alpha = 0.5f))
+                colors = CardDefaults.cardColors(containerColor = LightCard),
+                border = BorderStroke(1.dp, PrimaryPurple.copy(alpha = 0.5f))
             ) {
                 Row(
                     modifier = Modifier
@@ -136,7 +136,7 @@ fun GraphScreen(viewModel: MainViewModel) {
                         Text(
                             text = "Type: ${node.type} | Connections: ${connectedNodes.size}",
                             fontSize = 12.sp,
-                            color = TextSecondary
+                            color = TextSecondaryDark
                         )
                     }
                     Button(
@@ -159,16 +159,16 @@ fun GraphScreen(viewModel: MainViewModel) {
                 .fillMaxWidth()
                 .weight(1.5f)
                 .clip(RoundedCornerShape(12.dp))
-                .border(1.dp, AccentBorder, RoundedCornerShape(12.dp))
-                .background(DeepSlateSurface)
+                .border(1.dp, AccentBorderLight, RoundedCornerShape(12.dp))
+                .background(LightSurface)
                 .testTag("interactive_graph_canvas")
         ) {
             if (activeFocusNode == null) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Icon(Icons.Default.Hub, contentDescription = "Empty graph", tint = TextSecondary, modifier = Modifier.size(48.dp))
+                        Icon(Icons.Default.Hub, contentDescription = "Empty graph", tint = TextSecondaryDark, modifier = Modifier.size(48.dp))
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text("No items on timeline to map graph", color = TextSecondary, fontSize = 13.sp)
+                        Text("No items on timeline to map graph", color = TextSecondaryDark, fontSize = 13.sp)
                     }
                 }
             } else {
@@ -240,7 +240,7 @@ fun GraphScreen(viewModel: MainViewModel) {
 
                             // Draw line
                             drawLine(
-                                color = TextSecondary.copy(alpha = 0.5f),
+                                color = TextSecondaryDark.copy(alpha = 0.5f),
                                 start = Offset(startX, startY),
                                 end = Offset(endX, endY),
                                 strokeWidth = 2f * scaleX
@@ -271,13 +271,13 @@ fun GraphScreen(viewModel: MainViewModel) {
                         val isFocal = id == activeFocusNode.id
 
                         val nodeColor = when (node.type) {
-                            "PERSON" -> CorporateEmerald
-                            "PROJECT" -> CorporateAmber
-                            "DATE" -> CorporateIndigo
-                            "MEETING" -> CorporateIndigo
-                            "TASK" -> CorporateEmerald
-                            "DEADLINE" -> CorporateRuby
-                            else -> TextSecondary
+                            "PERSON" -> TaskGreen
+                            "PROJECT" -> WarningAmber
+                            "DATE" -> PrimaryPurple
+                            "MEETING" -> PrimaryPurple
+                            "TASK" -> TaskGreen
+                            "DEADLINE" -> DeadlineRed
+                            else -> TextSecondaryDark
                         }
 
                         // Outer highlight glow if focused
@@ -344,8 +344,8 @@ fun GraphScreen(viewModel: MainViewModel) {
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(8.dp))
-                        .background(if (isFocused) CorporateIndigo else DeepSlateCard)
-                        .border(1.dp, AccentBorder, RoundedCornerShape(8.dp))
+                        .background(if (isFocused) PrimaryPurple else LightCard)
+                        .border(1.dp, AccentBorderLight, RoundedCornerShape(8.dp))
                         .clickable { focusedNodeId = node.id }
                         .padding(horizontal = 12.dp, vertical = 8.dp)
                 ) {
@@ -359,7 +359,7 @@ fun GraphScreen(viewModel: MainViewModel) {
                         Text(
                             text = node.type,
                             fontSize = 10.sp,
-                            color = if (isFocused) Color.White.copy(alpha = 0.8f) else TextSecondary
+                            color = if (isFocused) Color.White.copy(alpha = 0.8f) else TextSecondaryDark
                         )
                     }
                 }

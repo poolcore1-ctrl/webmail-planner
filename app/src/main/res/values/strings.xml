@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WorkMail Planner</string>
+    <string name="accessibility_service_description">WorkMail Planner uses this service to securely read work emails from Outlook with a single tap for offline local AI processing.</string>
 </resources>

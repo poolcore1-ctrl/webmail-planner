@@ -46,7 +46,7 @@ fun IntakeScreen(viewModel: MainViewModel) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .background(DeepSlateBackground)
+            .background(WhiteBackground)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -61,7 +61,7 @@ fun IntakeScreen(viewModel: MainViewModel) {
                 Text(
                     text = "Rule-based parsing from shared text Sheet",
                     fontSize = 12.sp,
-                    color = TextSecondary
+                    color = TextSecondaryDark
                 )
             }
         }
@@ -69,8 +69,8 @@ fun IntakeScreen(viewModel: MainViewModel) {
         // Shared input text paste panel
         item {
             Card(
-                colors = CardDefaults.cardColors(containerColor = DeepSlateCard),
-                border = BorderStroke(1.dp, AccentBorder)
+                colors = CardDefaults.cardColors(containerColor = LightCard),
+                border = BorderStroke(1.dp, AccentBorderLight)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
@@ -83,7 +83,7 @@ fun IntakeScreen(viewModel: MainViewModel) {
                     Text(
                         text = "To guarantee 100% policy compliance, we do not monitor notification streams, read background folders, or request inbox tokens. Highlight email text in Outlook, tap Share, and select WorkMail Planner, or paste below:",
                         fontSize = 11.sp,
-                        color = TextSecondary
+                        color = TextSecondaryDark
                     )
                     Spacer(modifier = Modifier.height(12.dp))
 
@@ -100,8 +100,8 @@ fun IntakeScreen(viewModel: MainViewModel) {
                             .testTag("intake_input_field"),
                         textStyle = LocalTextStyle.current.copy(fontSize = 13.sp, color = Color.White),
                         colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = CorporateIndigo,
-                            unfocusedBorderColor = AccentBorder
+                            focusedBorderColor = PrimaryPurple,
+                            unfocusedBorderColor = AccentBorderLight
                         )
                     )
 
@@ -134,7 +134,7 @@ fun IntakeScreen(viewModel: MainViewModel) {
                                 inputText = templateText
                                 viewModel.loadSharedText(templateText)
                             },
-                            colors = ButtonDefaults.buttonColors(containerColor = CorporateIndigo),
+                            colors = ButtonDefaults.buttonColors(containerColor = PrimaryPurple),
                             modifier = Modifier.weight(1.5f).testTag("load_sample_intake")
                         ) {
                             Icon(Icons.Default.ContentPaste, contentDescription = "Load Sample", modifier = Modifier.size(16.dp))
@@ -154,8 +154,8 @@ fun IntakeScreen(viewModel: MainViewModel) {
                     
                     // Executive Summary Block
                     Card(
-                        colors = CardDefaults.cardColors(containerColor = DeepSlateSurface),
-                        border = BorderStroke(1.dp, AccentBorder)
+                        colors = CardDefaults.cardColors(containerColor = LightSurface),
+                        border = BorderStroke(1.dp, AccentBorderLight)
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Row(
@@ -169,14 +169,14 @@ fun IntakeScreen(viewModel: MainViewModel) {
                                 Box(
                                     modifier = Modifier
                                         .background(
-                                            if (result.riskLevel == "HIGH") CorporateRuby.copy(alpha = 0.2f) else CorporateAmber.copy(alpha = 0.2f),
+                                            if (result.riskLevel == "HIGH") DeadlineRed.copy(alpha = 0.2f) else WarningAmber.copy(alpha = 0.2f),
                                             RoundedCornerShape(4.dp)
                                         )
                                         .padding(horizontal = 8.dp, vertical = 2.dp)
                                 ) {
                                     Text(
                                         text = "${result.riskLevel} RISK",
-                                        color = if (result.riskLevel == "HIGH") CorporateRuby else CorporateAmber,
+                                        color = if (result.riskLevel == "HIGH") DeadlineRed else WarningAmber,
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight.Bold
                                     )
@@ -184,9 +184,9 @@ fun IntakeScreen(viewModel: MainViewModel) {
                             }
                             
                             Spacer(modifier = Modifier.height(10.dp))
-                            Text(result.executiveSummary, fontSize = 12.sp, color = TextPrimary)
+                            Text(result.executiveSummary, fontSize = 12.sp, color = TextPrimaryDark)
                             Spacer(modifier = Modifier.height(6.dp))
-                            Text(result.actionSummary, fontSize = 12.sp, color = TextSecondary)
+                            Text(result.actionSummary, fontSize = 12.sp, color = TextSecondaryDark)
                         }
                     }
 
@@ -203,8 +203,8 @@ fun IntakeScreen(viewModel: MainViewModel) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(DeepSlateCard, RoundedCornerShape(8.dp))
-                                .border(1.dp, if (isChecked) CorporateIndigo else AccentBorder, RoundedCornerShape(8.dp))
+                                .background(LightCard, RoundedCornerShape(8.dp))
+                                .border(1.dp, if (isChecked) PrimaryPurple else AccentBorderLight, RoundedCornerShape(8.dp))
                                 .padding(12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -223,18 +223,18 @@ fun IntakeScreen(viewModel: MainViewModel) {
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
                                     Text(extracted.title, fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                    Text(extracted.priority, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = if (extracted.priority == "HIGH") CorporateRuby else CorporateAmber)
+                                    Text(extracted.priority, fontSize = 10.sp, fontWeight = FontWeight.Bold, color = if (extracted.priority == "HIGH") DeadlineRed else WarningAmber)
                                 }
-                                Text(extracted.description, fontSize = 11.sp, color = TextSecondary)
+                                Text(extracted.description, fontSize = 11.sp, color = TextSecondaryDark)
                                 
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                    Text("📅 ${extracted.date}", fontSize = 10.sp, color = CorporateIndigo)
+                                    Text("📅 ${extracted.date}", fontSize = 10.sp, color = PrimaryPurple)
                                     if (extracted.time != null) {
-                                        Text("⏰ ${extracted.time}", fontSize = 10.sp, color = CorporateIndigo)
+                                        Text("⏰ ${extracted.time}", fontSize = 10.sp, color = PrimaryPurple)
                                     }
                                     if (extracted.projectLabel != null) {
-                                        Text("#${extracted.projectLabel}", fontSize = 10.sp, color = CorporateEmerald)
+                                        Text("#${extracted.projectLabel}", fontSize = 10.sp, color = TaskGreen)
                                     }
                                 }
                             }
@@ -248,7 +248,7 @@ fun IntakeScreen(viewModel: MainViewModel) {
                             inputText = ""
                             Toast.makeText(context, "Successfully approved and mapped to timeline!", Toast.LENGTH_LONG).show()
                         },
-                        colors = ButtonDefaults.buttonColors(containerColor = CorporateIndigo),
+                        colors = ButtonDefaults.buttonColors(containerColor = PrimaryPurple),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp)
